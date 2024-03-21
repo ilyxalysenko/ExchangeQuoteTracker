@@ -16,25 +16,25 @@ namespace ExchangeQuoteTracker
         public Form1()
         {
             InitializeComponent();
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             timer.Start();
         }
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
             // Получение котировок с помощью провайдеров и обновление соответствующих элементов UI
-            var binanceQuote = await binanceProvider.GetQuoteAsync("BTCUSDT");
             var bybitQuote = await bybitProvider.GetQuoteAsync("BTCUSDT");
-            var kucoinQuote = await kucoinProvider.GetQuoteAsync("BTC-USDT");
             var bitgetQuote = await bitgetProvider.GetQuoteAsync("BTCUSDT");
+            var kucoinQuote = await kucoinProvider.GetQuoteAsync("BTC-USDT");
+            var binanceQuote = await binanceProvider.GetQuoteAsync("BTCUSDT");
 
             // Обновление элементов UI с новыми котировками
             listView1.Items.Clear();
 
-            listView1.Items.Add($"{binanceQuote}");
-            listView1.Items.Add($"{bybitQuote}");
-            listView1.Items.Add($"{kucoinQuote}");
-            listView1.Items.Add($"{bitgetQuote}");
+            listView1.Items.Add($"{bybitQuote}usd - bybit");
+            listView1.Items.Add($"{bitgetQuote}usd - bitget");
+            listView1.Items.Add($"{kucoinQuote}usd - kucoin");
+            listView1.Items.Add($"{binanceQuote}usd - binance");
         }
 
         private void button1_Click(object sender, EventArgs e)
