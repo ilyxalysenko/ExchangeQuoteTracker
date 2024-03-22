@@ -36,13 +36,6 @@ namespace ExchangeQuoteTracker
         /// </summary>
         private void InitializeComponent()
         {
-            Provs = new List<IExchangeQuoteProvider>()
-            {
-                new BinanceQuoteProvider(),
-                new BybitQuoteProvider(),
-                new KucoinQuoteProvider(),
-                new BitgetQuoteProvider(),
-            };
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.listView1 = new System.Windows.Forms.ListView();
@@ -88,7 +81,7 @@ namespace ExchangeQuoteTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 450);
+            this.ClientSize = new System.Drawing.Size(326, 112);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.listView1);
             this.Name = "Form1";
