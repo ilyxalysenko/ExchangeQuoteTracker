@@ -43,7 +43,6 @@ namespace ExchangeQuoteTracker
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            AddQuotesToListView();
         }
 
         async void AddQuotesToListView()
