@@ -10,26 +10,34 @@ using Binance.Net.Objects.Options;
 using Microsoft.Extensions.Logging;
 using CryptoExchange.Net.Interfaces;
 using System.Linq;
+using ExchangeQuoteTracker.Model.Providers;
 namespace ExchangeQuoteTracker
 {
 
-    public class BinanceQuoteProvider : IExchangeQuoteProvider
+    internal class BinanceQuoteProvider : Provider, IExchangeQuoteProvider
     {
+        static string Name = "Binance";
+        
         private readonly BinanceSocketClient binanceClient;
         decimal LastPrice;
         public BinanceQuoteProvider()
         {
             binanceClient = new BinanceSocketClient();
         }
-        async Task<decimal> IExchangeQuoteProvider.GetQuoteAsync(string pair)
-        { 
-            var tickerSubscriptionResult = binanceClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(pair /*"BTCUSDT"*/, (update) =>
+        
+        async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
+        {
+            if (pair != null && binanceClient != null) 
             {
-                LastPrice = update.Data.LastPrice;
-            });
+                var tickerSubscriptionResult = await binanceClient.SpotApi.ExchangeData.SubscribeToTickerUpdatesAsync(pair /*"BTCUSDT"*/, (update) =>
+                {
+                    if (update.Data.LastPrice != 0) LastPrice = update.Data.LastPrice;
+                    else { throw new Exception("binanceClient update.Data.LastPrice = null"); }
+                });
+            }
             return LastPrice;
         }
-
+        string IExchangeQuoteProvider.GetName() { return Name; }
         //async Task<List<string>> IExchangeQuoteProvider.GetAvailablePairs()//получить список доступных на бирже торговых пар
         //{
         //    var exchangeInfo = await binanceClient.SpotApi.ExchangeData.GetExchangeInfoAsync();//получение информации об обмене данными на бирже

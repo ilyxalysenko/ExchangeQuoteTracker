@@ -1,4 +1,5 @@
 ﻿using CryptoExchange.Net;
+using ExchangeQuoteTracker.Providers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,10 @@ namespace ExchangeQuoteTracker
 {
     public partial class Form1 : Form
     {
+        private string Symbol;
+        private List<Label> quoteLabels;
+        private List<Label> nameLabels;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,38 +27,46 @@ namespace ExchangeQuoteTracker
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
-            // Получение котировок с помощью провайдеров и обновление соответствующих элементов UI
-            var bybitQuote = await bybitProvider.GetQuoteAsync("BTCUSDT");
-            var bitgetQuote = await bitgetProvider.GetQuoteAsync("BTCUSDT");
-            var kucoinQuote = await kucoinProvider.GetQuoteAsync("BTC-USDT");
-            var binanceQuote = await binanceProvider.GetQuoteAsync("BTCUSDT");
-
-            // Обновление элементов UI с новыми котировками
-            listView1.Items.Clear();
-
-            listView1.Items.Add($"{bybitQuote}usd - bybit");
-            listView1.Items.Add($"{bitgetQuote}usd - bitget");
-            listView1.Items.Add($"{kucoinQuote}usd - kucoin");
-            listView1.Items.Add($"{binanceQuote}usd - binance");
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+            AddQuotesToListView();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            // Действия при изменении выделенного элемента в listView1
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Действия при изменении выбранного элемента в comboBox2
+        }
+        async void AddQuotesToListView()
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+                Symbol = comboBox1.SelectedItem.ToString();
+                listView1.Items.Clear();
+                for (int i = 0; i < Provs.Count; i++)
+                {
+                    var provider = Provs[i];
+                    string name = provider.GetName();
+                    decimal? quote;
 
+                    if (i == 2)
+                    {
+                        quote = await provider.GetQuoteAsync(Symbol.Insert(3, "-"));
+                    }
+                    else
+                    {
+                        quote = await provider.GetQuoteAsync(Symbol);
+                    }
+
+                    listView1.Items.Add($"{quote} {name}");
+                }
+            }
         }
     }
 }

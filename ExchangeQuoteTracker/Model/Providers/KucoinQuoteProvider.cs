@@ -1,31 +1,38 @@
 ﻿using Binance.Net.Clients;
+using ExchangeQuoteTracker.Model.Providers;
 using Kucoin.Net.Clients;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ExchangeQuoteTracker
 {
-    internal class KucoinQuoteProvider:IExchangeQuoteProvider
+    internal class KucoinQuoteProvider: Provider, IExchangeQuoteProvider
     {
+        static string Name = "Kucoin";
+
         private readonly KucoinSocketClient kucoinClient;
-        decimal LastPrice;
+        decimal? LastPrice;
         public KucoinQuoteProvider()
         {
             kucoinClient = new KucoinSocketClient();
         }
-        async Task<decimal> IExchangeQuoteProvider.GetQuoteAsync(string pair)
+        async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
         {
-            //var ticker = await kucoinClient.SpotApi.ExchangeData.GetCurrentAvgPriceAsync(pair);//get price async pair
-            //return ticker.Data.Result.Price; //REST
-            var tickerSubscriptionResult = kucoinClient.SpotApi.SubscribeToTickerUpdatesAsync(pair/*"BTC-USDT"*/, (update) =>
+            if (pair != null && kucoinClient != null)
             {
-                var lastPrice = update.Data.LastPrice;
-            });
-            return this.LastPrice;
+                var tickerSubscriptionResult = kucoinClient.SpotApi.SubscribeToTickerUpdatesAsync(pair/*"BTC-USDT"*/, (update) =>
+                {
+                    if(update.Data.LastPrice != 0) LastPrice = update.Data.LastPrice;
+                    else { throw new Exception("kucoinClient update.Data.LastPrice = null"); }
+                });
+            }    
+            return LastPrice;
         }
+        string IExchangeQuoteProvider.GetName() { return Name; }
         //async Task<List<string>> IExchangeQuoteProvider.GetAvailablePairs()//получить список доступных на бирже торговых пар
         //{
         //    var exchangeInfo = await kucoinClient.FuturesApi;//получение информации об обмене данными на бирже

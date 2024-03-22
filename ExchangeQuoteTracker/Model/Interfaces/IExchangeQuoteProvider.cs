@@ -8,7 +8,9 @@ namespace ExchangeQuoteTracker
 {
     internal interface IExchangeQuoteProvider
     {
-        Task<decimal> GetQuoteAsync(string pair);
+        string Name { get; set; }
+        Task<decimal?> GetQuoteAsync(string pair);
         //Task<List<string>> GetAvailablePairs();
+        string GetName();
     }
 }

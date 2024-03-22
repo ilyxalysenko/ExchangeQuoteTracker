@@ -147,6 +147,7 @@
     <Compile Include="Model\Interfaces\IExchangeQuoteProvider.cs" />
     <Compile Include="Model\Providers\BybitQuoteProvider.cs" />
     <Compile Include="Model\Providers\KucoinQuoteProvider.cs" />
+    <Compile Include="Model\Providers\Provider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
