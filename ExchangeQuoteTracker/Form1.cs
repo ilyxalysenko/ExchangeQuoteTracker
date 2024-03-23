@@ -15,11 +15,9 @@ namespace ExchangeQuoteTracker
     public partial class Form1 : Form
     {
         private string Symbol;
-        //private List<Label> quoteLabels;
-        //private List<Label> nameLabels;
-
         public Form1()
         {
+            
             InitializeComponent();
             Provs = new List<IExchangeQuoteProvider>()
             {
@@ -28,7 +26,7 @@ namespace ExchangeQuoteTracker
                 new KucoinQuoteProvider(),
                 new BitgetQuoteProvider(),
             };
-            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            
             timer.Start();
         }
 
@@ -37,7 +35,7 @@ namespace ExchangeQuoteTracker
             if (comboBox1.SelectedItem != null)
             {
                 Symbol = comboBox1.SelectedItem.ToString();
-                listView1.Items.Clear();
+                listBox1.Items.Clear();
                 for (int i = 0; i < Provs.Count; i++)
                 {
                     var provider = Provs[i];
@@ -53,7 +51,7 @@ namespace ExchangeQuoteTracker
                         quote = await provider.GetQuoteAsync(Symbol);
                     }
 
-                    listView1.Items.Add($"{quote} {name}");
+                    listBox1.Items.Add($"{name}{quote}");
                 }
             }
         }

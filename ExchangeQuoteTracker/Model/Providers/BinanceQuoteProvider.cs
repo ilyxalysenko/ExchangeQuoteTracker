@@ -19,7 +19,7 @@ namespace ExchangeQuoteTracker
         private readonly BinanceSocketClient binanceClient;
         public BinanceQuoteProvider()
         {
-            binanceClient = new BinanceSocketClient(); Name = "Binance";
+            binanceClient = new BinanceSocketClient(); Name = "Binance............";
         }
         
         async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)

@@ -1,5 +1,6 @@
 ﻿using ExchangeQuoteTracker.Providers;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ExchangeQuoteTracker
@@ -38,8 +39,8 @@ namespace ExchangeQuoteTracker
         {
             this.components = new System.ComponentModel.Container();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.listView1 = new System.Windows.Forms.ListView();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // timer
@@ -48,16 +49,6 @@ namespace ExchangeQuoteTracker
             this.timer.Interval = 5000;
             timer.Tick += Timer_Tick;
             timer.Start();
-            // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(-1, 26);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(328, 424);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // comboBox1
             // 
@@ -73,17 +64,26 @@ namespace ExchangeQuoteTracker
             "PEPEUSDT"});
             this.comboBox1.Location = new System.Drawing.Point(-1, -2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(328, 28);
+            this.comboBox1.Size = new System.Drawing.Size(646, 28);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(-1, 33);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(646, 264);
+            this.listBox1.TabIndex = 2;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 112);
+            this.ClientSize = new System.Drawing.Size(644, 297);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.listView1);
             this.Name = "Form1";
             this.Text = "Quotes App";
             this.ResumeLayout(false);
@@ -96,9 +96,8 @@ namespace ExchangeQuoteTracker
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private ListBox listBox1;
     }
 }
 

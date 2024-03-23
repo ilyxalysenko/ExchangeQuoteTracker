@@ -15,7 +15,7 @@ namespace ExchangeQuoteTracker
         private readonly KucoinSocketClient kucoinClient;
         public KucoinQuoteProvider()
         {
-            kucoinClient = new KucoinSocketClient(); Name = "Kucoin";
+            kucoinClient = new KucoinSocketClient(); Name = "Kucoin..............";
         }
         async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
         {
