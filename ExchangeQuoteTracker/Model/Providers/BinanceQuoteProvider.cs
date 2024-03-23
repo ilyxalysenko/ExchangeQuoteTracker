@@ -16,10 +16,10 @@ namespace ExchangeQuoteTracker
 
     internal class BinanceQuoteProvider : Provider, IExchangeQuoteProvider
     {
-        private readonly BinanceSocketClient binanceClient;
+        public BinanceSocketClient binanceClient;
         public BinanceQuoteProvider()
         {
-            binanceClient = new BinanceSocketClient(); Name = "Binance............";
+            binanceClient = new BinanceSocketClient(); Name = "Binance";
         }
         
         async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)

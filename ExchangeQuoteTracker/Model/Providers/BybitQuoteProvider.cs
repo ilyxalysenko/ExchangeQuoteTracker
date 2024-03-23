@@ -14,7 +14,7 @@ namespace ExchangeQuoteTracker.Providers
         private readonly BybitSocketClient bybitClient;
         public BybitQuoteProvider()
         {
-            bybitClient = new BybitSocketClient(); Name = "Bybit.................";
+            bybitClient = new BybitSocketClient(); Name = "Bybit";
         }
         async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
         {

@@ -13,7 +13,7 @@ namespace ExchangeQuoteTracker
         private readonly BitgetSocketClient bitgetClient;
         public BitgetQuoteProvider()
         {
-            bitgetClient = new BitgetSocketClient(); Name = "Bitget................";
+            bitgetClient = new BitgetSocketClient(); Name = "Bitget ";
         }
         async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
         {

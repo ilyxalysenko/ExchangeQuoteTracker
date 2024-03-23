@@ -50,8 +50,8 @@ namespace ExchangeQuoteTracker
                     {
                         quote = await provider.GetQuoteAsync(Symbol);
                     }
-
-                    listBox1.Items.Add($"{name}{quote}");
+                    string formattedRow = $"{name.PadRight(40-name.Length*2)}{quote}";
+                    listBox1.Items.Add(formattedRow);
                 }
             }
         }

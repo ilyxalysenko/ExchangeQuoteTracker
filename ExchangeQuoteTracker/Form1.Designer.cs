@@ -11,10 +11,22 @@ namespace ExchangeQuoteTracker
 
         List<IExchangeQuoteProvider> Provs;
 
-        /// <summary>
-        /// Обязательная переменная конструктора.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        string[] Symbols = new string[] 
+        {
+            "BTCUSDT",
+            "ETHUSDT",
+            "BTCUSD",
+            "SOLUSDT",
+            "ETHUSD",
+            "ETHUSDC",
+            "POLYXKRW",
+            "PEPEUSDT"
+        };
+
+    /// <summary>
+    /// Обязательная переменная конструктора.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Освободить все используемые ресурсы.
@@ -53,15 +65,7 @@ namespace ExchangeQuoteTracker
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "BTCUSDT",
-            "ETHUSDT",
-            "BTCUSD",
-            "SOLUSDT",
-            "ETHUSD",
-            "ETHUSDC",
-            "POLYXKRW",
-            "PEPEUSDT"});
+            this.comboBox1.Items.AddRange(Symbols);//
             this.comboBox1.Location = new System.Drawing.Point(-1, -2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(646, 28);
@@ -71,10 +75,11 @@ namespace ExchangeQuoteTracker
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
+            this.listBox1.ItemHeight = 40;
             this.listBox1.Location = new System.Drawing.Point(-1, 33);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(646, 264);
+            this.listBox1.Sorted = true;
             this.listBox1.TabIndex = 2;
             // 
             // Form1
