@@ -10,7 +10,7 @@ namespace ExchangeQuoteTracker.Model.Providers
     public abstract class Provider : IExchangeQuoteProvider
     {
         public string Name { get; set; }
-
+        public decimal? LastPrice { get; set; }
         Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
         {
             throw new NotImplementedException();

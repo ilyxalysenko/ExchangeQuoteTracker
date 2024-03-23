@@ -13,7 +13,6 @@ namespace ExchangeQuoteTracker
     internal class KucoinQuoteProvider: Provider, IExchangeQuoteProvider
     {
         private readonly KucoinSocketClient kucoinClient;
-        decimal? LastPrice;
         public KucoinQuoteProvider()
         {
             kucoinClient = new KucoinSocketClient(); Name = "Kucoin";
@@ -22,13 +21,13 @@ namespace ExchangeQuoteTracker
         {
             if (pair != null && kucoinClient != null)
             {
-                var tickerSubscriptionResult = kucoinClient.SpotApi.SubscribeToTickerUpdatesAsync(pair/*"BTC-USDT"*/, (update) =>
+                var tickerSubscriptionResult = await kucoinClient.SpotApi.SubscribeToTickerUpdatesAsync(pair/*"BTC-USDT"*/, (update) =>
                 {
                     if(update.Data.LastPrice != 0) LastPrice = update.Data.LastPrice;
                     else { throw new Exception("kucoinClient update.Data.LastPrice = null"); }
                 });
             }    
-            return LastPrice;
+            return this.LastPrice;
         }
     }
 }

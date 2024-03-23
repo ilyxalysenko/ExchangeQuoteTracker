@@ -11,7 +11,6 @@ namespace ExchangeQuoteTracker
     internal class BitgetQuoteProvider : Provider, IExchangeQuoteProvider
     {
         private readonly BitgetSocketClient bitgetClient;
-        decimal LastPrice;
         public BitgetQuoteProvider()
         {
             bitgetClient = new BitgetSocketClient(); Name = "Bitget";
@@ -20,7 +19,7 @@ namespace ExchangeQuoteTracker
         {
             if (pair != null && bitgetClient != null)
             {
-                var tickerSubscriptionResult = bitgetClient.SpotApi.SubscribeToTickerUpdatesAsync(pair /*"BTCUSDT"*/, (update) =>
+                var tickerSubscriptionResult = await bitgetClient.SpotApi.SubscribeToTickerUpdatesAsync(pair /*"BTCUSDT"*/, (update) =>
                 {
                     if (update.Data.LastPrice != 0) LastPrice = update.Data.LastPrice;
                     else { throw new Exception("bitgetClient update.Data.LastPrice = null"); }

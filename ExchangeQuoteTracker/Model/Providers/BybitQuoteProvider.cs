@@ -12,7 +12,6 @@ namespace ExchangeQuoteTracker.Providers
     internal class BybitQuoteProvider : Provider, IExchangeQuoteProvider
     {
         private readonly BybitSocketClient bybitClient;
-        decimal LastPrice;
         public BybitQuoteProvider()
         {
             bybitClient = new BybitSocketClient(); Name = "Bybit";
@@ -21,7 +20,7 @@ namespace ExchangeQuoteTracker.Providers
         {
             if (pair != null && bybitClient != null)
             {
-                var tickerSubscriptionResult = bybitClient.V5SpotApi.SubscribeToTickerUpdatesAsync(pair /*"BTCUSDT"*/, (update) =>
+                var tickerSubscriptionResult = await bybitClient.V5SpotApi.SubscribeToTickerUpdatesAsync(pair /*"BTCUSDT"*/, (update) =>
                 {
                     if (update.Data.LastPrice != 0) LastPrice = update.Data.LastPrice;
                     else { throw new Exception("bybitClient update.Data.LastPrice = null"); }

@@ -17,7 +17,6 @@ namespace ExchangeQuoteTracker
     internal class BinanceQuoteProvider : Provider, IExchangeQuoteProvider
     {
         private readonly BinanceSocketClient binanceClient;
-        decimal LastPrice;
         public BinanceQuoteProvider()
         {
             binanceClient = new BinanceSocketClient(); Name = "Binance";
