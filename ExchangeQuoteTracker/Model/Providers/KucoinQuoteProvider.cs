@@ -12,13 +12,11 @@ namespace ExchangeQuoteTracker
 {
     internal class KucoinQuoteProvider: Provider, IExchangeQuoteProvider
     {
-        static string Name = "Kucoin";
-
         private readonly KucoinSocketClient kucoinClient;
         decimal? LastPrice;
         public KucoinQuoteProvider()
         {
-            kucoinClient = new KucoinSocketClient();
+            kucoinClient = new KucoinSocketClient(); Name = "Kucoin";
         }
         async Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
         {
@@ -32,11 +30,5 @@ namespace ExchangeQuoteTracker
             }    
             return LastPrice;
         }
-        string IExchangeQuoteProvider.GetName() { return Name; }
-        //async Task<List<string>> IExchangeQuoteProvider.GetAvailablePairs()//получить список доступных на бирже торговых пар
-        //{
-        //    var exchangeInfo = await kucoinClient.FuturesApi;//получение информации об обмене данными на бирже
-        //    return exchangeInfo.Data.Result.Symbols.Select(s => s.Name).ToList();//имена символов (торговых пар) из результирующего списка метод помещает их в список
-        //}
     }
 }

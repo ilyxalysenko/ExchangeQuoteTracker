@@ -10,7 +10,5 @@ namespace ExchangeQuoteTracker
     {
         string Name { get; set; }
         Task<decimal?> GetQuoteAsync(string pair);
-        //Task<List<string>> GetAvailablePairs();
-        string GetName();
     }
 }

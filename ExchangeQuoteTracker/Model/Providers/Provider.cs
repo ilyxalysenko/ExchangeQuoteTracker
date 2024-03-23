@@ -9,12 +9,7 @@ namespace ExchangeQuoteTracker.Model.Providers
 {
     public abstract class Provider : IExchangeQuoteProvider
     {
-        string IExchangeQuoteProvider.Name { get; set; }
-
-        public string GetName()
-        {
-            return "AbstractName";
-        }
+        public string Name { get; set; }
 
         Task<decimal?> IExchangeQuoteProvider.GetQuoteAsync(string pair)
         {

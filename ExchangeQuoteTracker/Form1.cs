@@ -34,19 +34,6 @@ namespace ExchangeQuoteTracker
 
         private async void Timer_Tick(object sender, EventArgs e)
         {
-            AddQuotesToListView();
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        async void AddQuotesToListView()
-        {
             if (comboBox1.SelectedItem != null)
             {
                 Symbol = comboBox1.SelectedItem.ToString();
@@ -54,7 +41,7 @@ namespace ExchangeQuoteTracker
                 for (int i = 0; i < Provs.Count; i++)
                 {
                     var provider = Provs[i];
-                    string name = provider.GetName();
+                    string name = provider.Name;
                     decimal? quote;
 
                     if (i == 2)
@@ -70,5 +57,14 @@ namespace ExchangeQuoteTracker
                 }
             }
         }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
     }
 }
