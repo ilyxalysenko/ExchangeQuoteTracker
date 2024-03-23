@@ -2,6 +2,7 @@
 using Binance.Net.Objects.Models.Spot.Socket;
 using ExchangeQuoteTracker.Model.Providers;
 using Moq;
+using NUnit.Framework.Interfaces;
 using NUnit.Framework;
 using System.Threading.Tasks;
 
